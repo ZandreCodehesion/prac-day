@@ -10,22 +10,18 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace prac_day.Controllers
 {
-    [Route("[controller]")]
+    [Route("[controller]")] //route accounts
     [ApiController]
     public class AccountsController : ControllerBase
     {
-        [HttpPost("Register")]
+        [HttpPost("Register")] //accounts/register
         public IActionResult Post([FromBody]Accounts newAccountInfo) //from body vat dadelik van die body af , not case sensitive :)
         {
             //register new user already done in above
 
-            //return Ok(null); // ok response without a body or text returned - nope
-            //return StatusCode(System.Net.HttpStatusCode.NoContent) - nope
-
-            //StatusCodeResult code = new StatusCodeResult(204); // nope
-            //return code;
-            //Response.StatusCode = 204;
-            return NoContent();
+            //return Ok(newAccountInfo.getUserId()); //test
+            //return Ok(newAccountInfo.userName); //test
+            return NoContent(); //return 204 code;
         }
     }
 }
@@ -37,18 +33,21 @@ public class Accounts
 {
 
     private Guid UserId;
-    private string userName;
-    private string password;
-    
+    public string userName { get; set; }
+    public string password { get; set; }
 
-    public Guid GenerateGuidId()
+
+    public void setUserId()
     {
-        return Guid.NewGuid();
+        UserId =  Guid.NewGuid();
+        return;
     }
 
-    public string Username { get; set; }
-    public string Password { get; set; }
-    public Guid Userid { get; set; }
+    public Guid getUserId()
+    {
+        return UserId;
+    }
+
 
 
 
