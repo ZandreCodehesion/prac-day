@@ -31,6 +31,18 @@ namespace prac_day.Controllers
             }
             return Ok(); //test
         }
+
+        
+        [HttpGet]
+        [Route("[controller]/{requestedID}")]
+        public IActionResult Get(Guid requestedID)
+        {
+            using var db = new AuthorContext();
+            
+                Console.WriteLine("Creating new entry");
+                var filter = db.Authors.Where(author => author.AuthorId == requestedID); //lamba function
+                return Ok(filter.First()); //moet first insit want dan maak dit die query wat in 'lys' formaat is , 'n single row.
+        }
     }
 }
 
